@@ -11,18 +11,18 @@ namespace Custom\clearmagentoshoppingcarts\Cron;
 class ClearCartSync
 {
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var \Custom\clearmagentoshoppingcarts\Logger\Logger
      */
-    protected $logger;
+    private $_logger;
 
     /**
      * Constructor
-     *
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Custom\clearmagentoshoppingcarts\Logger\Logger $logger
      */
-    public function __construct(\Psr\Log\LoggerInterface $logger)
-    {
-        $this->logger = $logger;
+    public function __construct(
+        \Custom\clearmagentoshoppingcarts\Logger\Logger $logger
+    ){
+        $this->_logger = $logger;
     }
 
     /**
@@ -30,5 +30,6 @@ class ClearCartSync
      */
     public function execute()
     {
+        $this->_logger->info("running cron job");
     }
 }
