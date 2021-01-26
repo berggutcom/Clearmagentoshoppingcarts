@@ -11,12 +11,19 @@ then create a cron job on your server and run the extension every night you need
 3. php bin/magento module:enable Custom_Clearmagentoshoppingcarts
 4. deploy the site using below cli
  -php bin/magento maintenance:enable
+ 
  -rm -rf var/cache/* var/view_preprocessed/* generated/* pub/static/*
+ 
  -php bin/magento setup:upgrade
+ 
  -php bin/magento setup:di:compile
+ 
  -php bin/magento setup:static-content:deploy en_US -f
+ 
  -php bin/magento setup:static-content:deploy de_DE -f
+ 
  -php bin/magento cache:flush
+ 
  -php bin/magento maintenance:disable
  
 Cron tab rule => 59 23 * * *
@@ -27,9 +34,11 @@ Cron tab rule => 59 23 * * *
  php bin/magento cron:run
  
 6. Please verify cronjob working
+
  crontab -l
  
 7. We can execute Clear cart using command line
+
 php bin/magento berggut:cart:clear
 
 
