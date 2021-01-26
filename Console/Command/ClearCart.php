@@ -1,9 +1,10 @@
 <?php
 
 
-namespace Custom\clearmagentoshoppingcarts\Console\Command;
+namespace Custom\Clearmagentoshoppingcarts\Console\Command;
 
-
+use Magento\Framework\App\State;
+use Magento\Framework\ObjectManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,12 +13,19 @@ class ClearCart extends Command
 {
     protected $_logger;
 
+    private $_objectManager;
+
+    protected $_appState;
+
     public function __construct(
-        \Custom\clearmagentoshoppingcarts\Logger\Logger $logger,
-        $name = null
+        \Custom\Clearmagentoshoppingcarts\Logger\Logger $logger,
+        ObjectManagerInterface $objectManager,
+        State $appState
     ) {
+        parent::__construct();
         $this->_logger = $logger;
-        parent::__construct($name);
+        $this->_objectManager = $objectManager;
+        $this->_appState = $appState;
     }
 
     /**
@@ -39,8 +47,24 @@ class ClearCart extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        $this->_logger->info("Hello logger");
-        $output->writeln("execute clear cart using command line");
+        $this->_appState->setAreaCode('frontend');
+
+        $this->_logger->info("start clear cart: command");
+        $output->writeln("start clear cart: command");
+
+        $this->clearCart();
+
+        $this->_logger->info("end clear cart: command");
+        $output->writeln("end clear cart using command");
     }
 
+    public function clearCart(){
+        $resource = $this->_objectManager->get('Magento\Framework\App\ResourceConnection');
+        $connection = $resource->getConnection();
+
+        $table = $connection->getTableName('m9_quote');
+
+        $query = "DELETE FROM " . $table;
+        $connection->query($query);
+    }
 }

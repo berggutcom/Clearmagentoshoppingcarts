@@ -1,28 +1,34 @@
 <?php
 
 
-namespace Custom\clearmagentoshoppingcarts\Cron;
+namespace Custom\Clearmagentoshoppingcarts\Cron;
 
+use Magento\Framework\ObjectManagerInterface;
 
 /**
  * Class ClearCartSync
- * @package Custom\clearmagentoshoppingcarts\Cron
+ * @package Custom\Clearmagentoshoppingcarts\Cron
  */
 class ClearCartSync
 {
     /**
-     * @var \Custom\clearmagentoshoppingcarts\Logger\Logger
+     * @var \Custom\Clearmagentoshoppingcarts\Logger\Logger
      */
     private $_logger;
 
+    private $_objectManager;
+
     /**
      * Constructor
-     * @param \Custom\clearmagentoshoppingcarts\Logger\Logger $logger
+     * @param \Custom\Clearmagentoshoppingcarts\Logger\Logger $logger
+     * @param ObjectManagerInterface $objectManager
      */
     public function __construct(
-        \Custom\clearmagentoshoppingcarts\Logger\Logger $logger
+        \Custom\Clearmagentoshoppingcarts\Logger\Logger $logger,
+        ObjectManagerInterface $objectManager
     ){
         $this->_logger = $logger;
+        $this->_objectManager = $objectManager;
     }
 
     /**
@@ -30,6 +36,20 @@ class ClearCartSync
      */
     public function execute()
     {
-        $this->_logger->info("running cron job");
+        $this->_logger->info("start clear cart: cron");
+
+        $this->clearCart();
+
+        $this->_logger->info("end clear cart: cron");
+    }
+
+    public function clearCart(){
+        $resource = $this->_objectManager->get('Magento\Framework\App\ResourceConnection');
+        $connection = $resource->getConnection();
+
+        $table = $connection->getTableName('m9_quote');
+
+        $query = "DELETE FROM " . $table;
+        $connection->query($query);
     }
 }
