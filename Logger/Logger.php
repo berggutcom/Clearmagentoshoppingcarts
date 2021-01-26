@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Custom\clearmagentoshoppingcarts\Logger;
+namespace Custom\Clearmagentoshoppingcarts\Logger;
 
 
 class Logger extends \Monolog\Logger

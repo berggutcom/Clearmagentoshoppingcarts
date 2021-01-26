@@ -3,22 +3,22 @@
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="ClearCart" xsi:type="object">Custom\clearmagentoshoppingcarts\Console\Command\ClearCart</item>
+                <item name="ClearCart" xsi:type="object">Custom\Clearmagentoshoppingcarts\Console\Command\ClearCart</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Custom\clearmagentoshoppingcarts\Logger\Handler">
+    <type name="Custom\Clearmagentoshoppingcarts\Logger\Handler">
         <arguments>
             <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
         </arguments>
     </type>
 
-    <type name="Custom\clearmagentoshoppingcarts\Logger\Logger">
+    <type name="Custom\Clearmagentoshoppingcarts\Logger\Logger">
         <arguments>
-            <argument name="name" xsi:type="string">clearmagentoshoppingcarts</argument>
+            <argument name="name" xsi:type="string">Clearmagentoshoppingcarts</argument>
             <argument name="handlers" xsi:type="array">
-                <item name="system" xsi:type="object">Custom\clearmagentoshoppingcarts\Logger\Handler</item>
+                <item name="system" xsi:type="object">Custom\Clearmagentoshoppingcarts\Logger\Handler</item>
             </argument>
         </arguments>
     </type>

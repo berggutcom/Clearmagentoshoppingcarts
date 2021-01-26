@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Custom\clearmagentoshoppingcarts\Logger;
+namespace Custom\Clearmagentoshoppingcarts\Logger;
 
 
 class Handler extends \Magento\Framework\Logger\Handler\Base
