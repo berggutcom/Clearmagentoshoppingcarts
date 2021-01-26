@@ -1,4 +1,4 @@
-# clearmagentoshoppingcarts
+# Clearmagentoshoppingcarts
 Clear all non ordered shopping carts with a cron job
 
 the magento extension should be uploadet to folder app/code/
