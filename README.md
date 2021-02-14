@@ -41,7 +41,7 @@ Cron tab rule => 59 23 * * *
 
 php bin/magento berggut:cart:clear
 
-
+have a great day :-)
  
 
 
